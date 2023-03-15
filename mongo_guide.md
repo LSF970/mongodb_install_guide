@@ -42,6 +42,6 @@ Document (basic unit of data in MongoDB):
 }
 ```
 
-MongoDB Database (Can contain one or more collections)
- -> Collections (Can contain multiple documents)
-  -> Document (Key value pair list or array or nested document)
+MongoDB Database (Can contain one or more collections)<br>
+      -> Collections (Can contain multiple documents)<br>
+          -> Document (Key value pair list or array or nested document)
