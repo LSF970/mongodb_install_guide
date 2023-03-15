@@ -118,6 +118,8 @@ db.trainers.insertOne({firstname: "Luke", Surname: "Fairbrass", department: "Dev
 db.trainers.insertOne({firstname: "Alan", Surname: "Gulle", department: "Data"})
 ```
 
+# C - Create
+
 ## SELECT * FROM TRAINERS
 
 Simlpy use .find() to see everything in the collection (table)
@@ -138,6 +140,93 @@ Lets see the changes on Atlas:
 
 ![Alt Text](./images/changes_on_atlas.jpg)
 
+# R - Retrieve/Read
+
+## find() and $in
+
+find everything:
+
+```db.<collection>.find()```
+
+find a specific value:
+```db.<collection>.find({field: $eq: <value>})```
+
+so
+
+```db.learners.find({name: "Jess"})```
+
+## Projection
+
+This is similar to WHERE in SQL. Just find certain parts of each doc:
+
+```{name:1, property_type:1, room_type:1, bedrooms:1, beds:1, amenities:1}```
+
+## Comparisons
+
+How do we compare in Mongo? 
+
+Here is an example using $gt
+
+```db.listingsAndReviews.find({bedrooms:{$gt:10}},{bedrooms:1, beds:1, price:1})```
+
+`$gt` = greater than
+
+so `$gt:10` means greater than 10
+
+`$gte` = greater than or equal to
 
 
+`$lt: 2`
+`$lt` = less than
 
+`$lte` = less than or equal to.
+
+## Multiple finds using $and
+
+```db.collection.find($and: [ {expression}, {expression},....])```
+
+OR is exactly the same:
+
+
+```db.collection.find($or: [ {expression}, {expression},....])```
+
+## $and and comparison operator
+
+```db.collection.find({$and:[{bedrooms:{$lte:3}}, {beds:3}]})```
+
+Gets less than or equal to 3 bedrooms but must have 3 bedrooms
+
+## Example of the above in compass:
+
+![Alt Text](./images/example_compass_work.jpg)
+
+
+## $all operator
+
+The `$all` operator means Mongo will not care about the order of elements in the array you give it:
+
+```{products:{$all:["Derivatives", "InvestmentStock"]}}```
+
+Gives 706 documents as it doesn't care about order.
+
+```{products:["Derivatives", "InvestmentStock"]}```
+
+Gives only 92 documents as the two elements need to be index 0 and 1 specifically.
+
+# U - Update
+
+Various updates and replace methods in MongoDB:
+
+- updateOne()
+- updataMany()
+- replaceOne()
+- findOneAndReplace()
+- findOneAndUpdate()
+- findAndModify()
+
+# D - Delete
+
+- deleteOne()
+- deleteMany()
+
+deleteMany is dangerous, if you do not give it anything to work from it will delete all documents in the collection!
