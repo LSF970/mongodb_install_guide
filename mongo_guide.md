@@ -224,6 +224,31 @@ Various updates and replace methods in MongoDB:
 - findOneAndUpdate()
 - findAndModify()
 
+### updateOne()
+
+First find a specific document. In this case I am searching by name:
+
+```
+db.listingsAndReviews.find({name: "Ribeira Charming Duplex"})
+```
+
+![Alt Text](./images/find_villa.jpg)
+
+Now let's use update one to change the accomodates field to 10:
+
+```
+db.listingsAndReviews.updateOne({name: "Ribeira Charming Duplex"},{$set: {accomodates: 10}})
+```
+
+This should give you the velow message when successful:
+
+![Alt Text](./images/update_message.jpg)
+
+And when we use find again, we can see the accomodates value has been updated to 10:
+
+![Alt Text](./images/new_accomodates_value.jpg)
+
+
 # D - Delete
 
 - deleteOne()
